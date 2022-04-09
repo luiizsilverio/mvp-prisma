@@ -1,6 +1,7 @@
+import { FormEvent, useState } from "react";
 import { GetServerSideProps } from "next";
-import { prismaClient } from "../../prisma";
 import { signOut } from "next-auth/react";
+import { prismaClient } from "../../prisma";
 import { Task } from "@prisma/client";
 
 type TasksProps = {
@@ -8,6 +9,20 @@ type TasksProps = {
 }
 
 export default function App({ tasks }: TasksProps) {
+  const [newTask, setNewTask] = useState('')
+
+  async function handleCreateTask(event: FormEvent) {
+    event.preventDefault()
+
+    await fetch('http://localhost:3000/api/tasks/create', {
+      method: 'POST',
+      body: JSON.stringify({ title: newTask }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  }
+
   return (
     <>
       <h1 className="text-4xl">Tarefas</h1>
@@ -18,6 +33,12 @@ export default function App({ tasks }: TasksProps) {
           ))
         }
       </ul>
+      <form onSubmit={handleCreateTask}>
+        <input type="text" value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+        />
+        <button type="submit">Cadastrar</button>
+      </form>
       <button onClick={() => signOut({ callbackUrl: "/" })}>Sair</button>
     </>
   )
