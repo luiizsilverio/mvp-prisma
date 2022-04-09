@@ -1,4 +1,5 @@
-import { signIn, signOut, useSession } from "next-auth/react";
+import { GetServerSideProps } from "next";
+import { getSession, signIn, signOut, useSession } from "next-auth/react";
 import { FacebookSvg, TwitterSvg, GithubSvg } from "../icons";
 
 export default function Home() {
@@ -6,8 +7,10 @@ export default function Home() {
 
   function handleSignIn() {
     signIn("github")
+      .catch(err => console.log(err))
   }
 
+  console.log(data)
   return (
     <>
       <div className="h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -79,7 +82,13 @@ export default function Home() {
             <div>
               <button
                 type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500"
+                className={`
+                  group relative w-full flex justify-center py-2 px-4
+                  border border-transparent text-sm font-medium rounded-md
+                  text-white bg-violet-600 hover:bg-violet-700
+                  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500
+                  ${ status && status === 'loading' && "disabled"}
+                `}
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                   {/* Heroicon name: solid/lock-closed */}
@@ -114,4 +123,23 @@ export default function Home() {
       </div>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async({ req }) => {
+  const session = await getSession({ req })
+
+  // se session diferente de nulo, significa que o usuário está autenticado
+  // se estiver autenticado, redireciona para /app
+  if (session) {
+    return {
+      redirect: {
+        destination: '/app',
+        permanent: false,
+      }
+    }
+  }
+
+  return {
+    props: {}
+  }
 }
