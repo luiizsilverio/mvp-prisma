@@ -3,6 +3,7 @@
 ## Conteúdo
 * [Sobre o Projeto](#sobre-o-projeto)
 * [Tecnologias](#hammer_and_wrench-tecnologias)
+* [Iniciando a Aplicação](#car-Iniciando-a-aplicação)
 * [Screenshots](#camera_flash-screenshots)
 * [Licença](#balance_scale-licença)
 * [Contato](#email-contato)
@@ -19,6 +20,26 @@ __Prisma ORM__ realmente facilita trabalhar com banco de dados, e a aplicação 
 * __Prisma ORM__ para acessar um banco de dados __PostgreSQL__
 * __Next-Auth__ para fazer autenticação
 * __TailwindCSS__ para facilitar a estilização
+
+
+## :car: Iniciando a aplicação
+```bash
+# Baixe o repositório com git clone e entre na pasta do projeto.
+git clone https://github.com/luiizsilverio/mvp-prisma.git
+
+# Execute yarn para instalar as dependências (ou npm install)
+yarn
+
+# Informe o CLIENT_ID e SECRET da aplicação no Github no arquivo .env.local
+
+# Informe o caminho do banco de dados no arquivo .env
+
+# Se o banco ainda não existir, rode as migrations com o comando:
+yarn prisma migrate dev
+
+# Para iniciar a aplicação em http://localhost:3000
+$ yarn dev
+```
 
 
 ## :camera_flash: Screenshots
