@@ -17,11 +17,12 @@ __Prisma ORM__ realmente facilita trabalhar com banco de dados, e a aplicação 
 * __React__ com __Next__
 * __Typescript__
 * __Prisma ORM__ para acessar um banco de dados __PostgreSQL__
+* __Next-Auth__ para fazer autenticação
 * __TailwindCSS__ para facilitar a estilização
 
 
 ## :camera_flash: Screenshots
-![](https://github.com/luiizsilverio/mvp-prisma/blob/main/public/tela1.png)
+![](https://github.com/luiizsilverio/mvp-prisma/blob/main/public/mvp-prisma.gif)
 
 
 ## :balance_scale: Licença
