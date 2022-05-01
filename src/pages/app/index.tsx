@@ -24,7 +24,7 @@ export default function App({ tasks }: TasksProps) {
   }
 
   return (
-    <>
+    <div className="container">
       <h1 className="text-4xl">Tarefas</h1>
       <ul className="text-lg">
         {
@@ -34,13 +34,17 @@ export default function App({ tasks }: TasksProps) {
         }
       </ul>
       <form onSubmit={handleCreateTask}>
-        <input type="text" value={newTask}
+        <input type="text" className="tarefa" value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
         />
-        <button type="submit">Cadastrar</button>
+        <button type="submit" className="btn-green">Cadastrar</button>
       </form>
-      <button onClick={() => signOut({ callbackUrl: "/" })}>Sair</button>
-    </>
+      <button className="btn-red"
+        onClick={() => signOut({ callbackUrl: "/" })}
+      >
+        Sair
+      </button>
+    </div>
   )
 }
 
